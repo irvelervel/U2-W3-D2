@@ -12,6 +12,41 @@ const appointmentDateReference = document.getElementById('appointment-date')
 // prendo un riferimento al form, in modo da fermare il suo comportamento di default
 const formReference = document.querySelector('form')
 
+const generateList = function () {
+  // riempiamo la lista degli eventi al caricamento della pagina a partire dal mio contenuto del localStorage
+  const appointmentsFromLocalStorage = localStorage.getItem('appointments') // come stringa!!
+  if (appointmentsFromLocalStorage) {
+    const listReference = document.querySelector('#appointments-list ul')
+    listReference.innerHTML = ''
+    // proseguiamo nel nostro codice solamente se ci sono eventi da mostrare!
+    const appointments = JSON.parse(appointmentsFromLocalStorage)
+    // appointments è un array vero e proprio con gli oggetti evento dentro
+    //   genero i miei list-item a partire dall'array appointments
+    appointments.forEach((app) => {
+      let newLi = document.createElement('li')
+      newLi.classList.add(
+        'list-group-item',
+        'd-flex',
+        'justify-content-between'
+      ) // inserisco la classe CSS di bootstrap
+      newLi.innerText = `${app.name} il ${app.date}`
+      // <li class="list-group-item">Concerto dei Pooh il 17-12-2023</li>
+      // inserisco il bottone per eliminare l'evento
+      let deleteButton = document.createElement('button')
+      deleteButton.classList.add('btn', 'btn-danger')
+      deleteButton.innerHTML = '<i class="bi bi-trash3-fill"></i>'
+      deleteButton.addEventListener('click', function () {
+        // EXTRA: inserisci qui il codice per eliminare
+        // un elemento dalla lista (e dal localStorage!)
+        console.log('clicked!')
+      })
+      newLi.appendChild(deleteButton)
+      // ora appendiamo il nuovo <li> alla <ul>
+      listReference.appendChild(newLi)
+    })
+  }
+}
+
 const saveNewAppointment = function (e) {
   e.preventDefault()
   // creo un oggetto a partire dal nome e dalla data dell'appuntamento
@@ -63,40 +98,5 @@ const saveNewAppointment = function (e) {
 }
 
 formReference.addEventListener('submit', saveNewAppointment)
-
-const generateList = function () {
-  // riempiamo la lista degli eventi al caricamento della pagina a partire dal mio contenuto del localStorage
-  const appointmentsFromLocalStorage = localStorage.getItem('appointments') // come stringa!!
-  if (appointmentsFromLocalStorage) {
-    const listReference = document.querySelector('#appointments-list ul')
-    listReference.innerHTML = ''
-    // proseguiamo nel nostro codice solamente se ci sono eventi da mostrare!
-    const appointments = JSON.parse(appointmentsFromLocalStorage)
-    // appointments è un array vero e proprio con gli oggetti evento dentro
-    //   genero i miei list-item a partire dall'array appointments
-    appointments.forEach((app) => {
-      let newLi = document.createElement('li')
-      newLi.classList.add(
-        'list-group-item',
-        'd-flex',
-        'justify-content-between'
-      ) // inserisco la classe CSS di bootstrap
-      newLi.innerText = `${app.name} il ${app.date}`
-      // <li class="list-group-item">Concerto dei Pooh il 17-12-2023</li>
-      // inserisco il bottone per eliminare l'evento
-      let deleteButton = document.createElement('button')
-      deleteButton.classList.add('btn', 'btn-danger')
-      deleteButton.innerHTML = '<i class="bi bi-trash3-fill"></i>'
-      deleteButton.addEventListener('click', function () {
-        // EXTRA: inserisci qui il codice per eliminare
-        // un elemento dalla lista (e dal localStorage!)
-        console.log('clicked!')
-      })
-      newLi.appendChild(deleteButton)
-      // ora appendiamo il nuovo <li> alla <ul>
-      listReference.appendChild(newLi)
-    })
-  }
-}
 
 generateList()

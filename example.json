@@ -1,0 +1,12 @@
+{
+  "firstName": "Stefano",
+  "age": 19,
+  "isTeacher": true,
+  "languages": ["JS", "Java", "Python"],
+  "obj": {
+    "firstName": "Stefano",
+    "age": 19,
+    "isTeacher": true,
+    "languages": ["JS", "Java", "Python"]
+  }
+}
