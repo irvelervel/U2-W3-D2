@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notepad in JS</title>
+    <style>
+      h2 {
+        text-align: center;
+      }
+
+      textarea {
+        display: block;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      form div {
+        text-align: center;
+        margin-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>BLOCCO NOTE IN JS</h2>
+    <form>
+      <textarea
+        rows="20"
+        placeholder="Inserisci qui il testo"
+        id="textArea"
+        autofocus
+      ></textarea>
+      <div>
+        <button type="button" id="load">CARICA</button>
+        <button type="button" id="save">SALVA</button>
+        <button type="button" id="reset">RESET</button>
+      </div>
+    </form>
+    <script src="notepad.js"></script>
+  </body>
+</html>
